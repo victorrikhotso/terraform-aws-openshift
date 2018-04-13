@@ -1,30 +1,9 @@
-# Define the RHEL 7.2 AMI by:
-# RedHat, Latest, x86_64, EBS, HVM, RHEL 7.2
-data "aws_ami" "rhel7_2" {
-  most_recent = true
-
-  owners = ["309956199498"] // Red Hat's account ID.
-
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
-  }
-
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  filter {
-    name   = "name"
-    values = ["RHEL-7.2*"]
-  }
-}
+# Define the CentOS 7 AMI by:
+# Latest, x86_64, EBS, HVM, Centos7
+# data "aws_ami" "centos7" {
+#   most_recent = true
+#   id = "ami-e9b9b58f"
+# }
 
 # Define an Amazon Linux AMI.
 data "aws_ami" "amazonlinux" {

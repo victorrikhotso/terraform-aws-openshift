@@ -51,10 +51,14 @@ yum update -y
 # Note: The step below is not in the official docs, I needed it to install
 # Docker. If anyone finds out why, I'd love to know.
 # See: https://forums.aws.amazon.com/thread.jspa?messageID=574126
-yum-config-manager --enable rhui-REGION-rhel-server-extras
+#yum-config-manager --enable rhui-REGION-rhel-server-extras
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
 # Docker setup. Check the version with `docker version`, should be 1.12.
 yum install -y docker
+yum install -y NetworkManager
+systemctl enable NetworkManager
+systemctl start NetworkManager
 
 # Configure the Docker storage back end to prepare and use our EBS block device.
 # https://docs.openshift.org/latest/install_config/install/host_preparation.html#configuring-docker-storage
@@ -73,4 +77,4 @@ systemctl restart docker
 
 # Allow the ec2-user to sudo without a tty, which is required when we run post
 # install scripts on the server.
-echo Defaults:ec2-user \!requiretty >> /etc/sudoers
+echo Defaults:centos \!requiretty >> /etc/sudoers
