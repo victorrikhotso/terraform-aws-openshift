@@ -5,7 +5,7 @@ resource "aws_instance" "bastion" {
   iam_instance_profile = "${aws_iam_instance_profile.bastion-instance-profile.id}"
   subnet_id            = "${aws_subnet.public-subnet.id}"
 
-  security_groups = [
+  vpc_security_group_ids = [
     "${aws_security_group.openshift-vpc.id}",
     "${aws_security_group.openshift-ssh.id}",
     "${aws_security_group.openshift-public-egress.id}",
@@ -13,8 +13,11 @@ resource "aws_instance" "bastion" {
 
   key_name = "${aws_key_pair.keypair.key_name}"
 
-  tags {
-    Name    = "OpenShift Bastion"
-    Project = "openshift"
-  }
+  //  Use our common tags and add a specific name.
+  tags = "${merge(
+    local.common_tags,
+    map(
+      "Name", "OpenShift Bastion"
+    )
+  )}"
 }
