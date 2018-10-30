@@ -20,10 +20,9 @@ resource "aws_eip" "master_eip" {
 
 //  Launch configuration for the consul cluster auto-scaling group.
 resource "aws_instance" "master" {
-
   ami                  = "${data.aws_ami.centos7.id}"
   # Master nodes require at least 16GB of memory.
-  instance_type        = "m4.xlarge"
+  instance_type        = "t3.xlarge"
   subnet_id            = "${aws_subnet.public-subnet.id}"
   iam_instance_profile = "${aws_iam_instance_profile.openshift-instance-profile.id}"
   user_data            = "${data.template_file.setup-master.rendered}"
@@ -81,7 +80,6 @@ resource "aws_eip" "node2_eip" {
 //  Create the two nodes. This would be better as a Launch Configuration and
 //  autoscaling group, but I'm keeping it simple...
 resource "aws_instance" "node1" {
-
   ami                  = "${data.aws_ami.centos7.id}"
   instance_type        = "${var.amisize}"
   subnet_id            = "${aws_subnet.public-subnet.id}"
@@ -120,7 +118,6 @@ resource "aws_instance" "node1" {
 }
 
 resource "aws_instance" "node2" {
-
   ami                  = "${data.aws_ami.centos7.id}"
   instance_type        = "${var.amisize}"
   subnet_id            = "${aws_subnet.public-subnet.id}"

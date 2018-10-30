@@ -1,13 +1,13 @@
 //  Setup the core provider information.
 provider "aws" {
-  region  = "eu-west-1"
+  region  = "${var.region}"
 }
 
 //  Create the OpenShift cluster using our module.
 module "openshift" {
   source          = "./modules/openshift"
   region          = "eu-west-1"
-  amisize         = "t2.large"    //  Smallest that meets the min specs for OS
+  amisize         = "t3.large"
   vpc_cidr        = "10.0.0.0/16"
   subnetaz        = "${var.subnetaz}"
   subnet_cidr     = "10.0.1.0/24"
