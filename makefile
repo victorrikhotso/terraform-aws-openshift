@@ -17,15 +17,9 @@ openshift:
 	cat install-from-bastion.sh | ssh -o StrictHostKeyChecking=no -A ec2-user@$$(terraform output bastion-public_ip)
 
 	# Now the installer is done, run the postinstall steps on each host.
-<<<<<<< HEAD
-	cat ./scripts/postinstall-master.sh | ssh -A ec2-user@$$(terraform output bastion-public_dns) "ssh centos@master.openshift.local"
-	cat ./scripts/postinstall-node.sh | ssh -A ec2-user@$$(terraform output bastion-public_dns) "ssh centos@node1.openshift.local"
-	cat ./scripts/postinstall-node.sh | ssh -A ec2-user@$$(terraform output bastion-public_dns) "ssh centos@node2.openshift.local"
-=======
-	cat ./scripts/postinstall-master.sh | ssh -A ec2-user@$$(terraform output bastion-public_ip) ssh master.openshift.local
-	cat ./scripts/postinstall-node.sh | ssh -A ec2-user@$$(terraform output bastion-public_ip) ssh node1.openshift.local
-	cat ./scripts/postinstall-node.sh | ssh -A ec2-user@$$(terraform output bastion-public_ip) ssh node2.openshift.local
->>>>>>> 3889784169b6838dd284cb693c5581766e3b17fc
+	cat ./scripts/postinstall-master.sh | ssh -A ec2-user@$$(terraform output bastion-public_ip) "ssh centos@master.openshift.local"
+	cat ./scripts/postinstall-node.sh | ssh -A ec2-user@$$(terraform output bastion-public_ip) "ssh centos@node1.openshift.local"
+	cat ./scripts/postinstall-node.sh | ssh -A ec2-user@$$(terraform output bastion-public_ip) "ssh centos@node2.openshift.local"
 
 # Open the console.
 browse-openshift:
@@ -35,19 +29,11 @@ browse-openshift:
 ssh-bastion:
 	ssh -t -A ec2-user@$$(terraform output bastion-public_ip)
 ssh-master:
-<<<<<<< HEAD
-	ssh -t -A ec2-user@$$(terraform output bastion-public_dns) "ssh centos@master.openshift.local"
+	ssh -t -A ec2-user@$$(terraform output bastion-public_ip) "ssh centos@master.openshift.local"
 ssh-node1:
-	ssh -t -A ec2-user@$$(terraform output bastion-public_dns) "ssh centos@node1.openshift.local"
+	ssh -t -A ec2-user@$$(terraform output bastion-public_ip) "ssh centos@node1.openshift.local"
 ssh-node2:
-	ssh -t -A ec2-user@$$(terraform output bastion-public_dns) "ssh centos@node2.openshift.local"
-=======
-	ssh -t -A ec2-user@$$(terraform output bastion-public_ip) ssh master.openshift.local
-ssh-node1:
-	ssh -t -A ec2-user@$$(terraform output bastion-public_ip) ssh node1.openshift.local
-ssh-node2:
-	ssh -t -A ec2-user@$$(terraform output bastion-public_ip) ssh node2.openshift.local
->>>>>>> 3889784169b6838dd284cb693c5581766e3b17fc
+	ssh -t -A ec2-user@$$(terraform output bastion-public_ip) "ssh centos@node2.openshift.local"
 
 # Create sample services.
 sample:
