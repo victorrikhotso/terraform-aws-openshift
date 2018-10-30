@@ -4,10 +4,6 @@ variable "region" {
   //  The default below will be fine for many, but to make it clear for first
   //  time users, there's no default, so you will be prompted for a region.
   default = "eu-west-1"
-<<<<<<< HEAD
-
-=======
->>>>>>> f8d11ce8df16709283e474da10340d0421905503
 }
 
 //  The public key to use for SSH access.
