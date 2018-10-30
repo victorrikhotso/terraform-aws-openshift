@@ -3,12 +3,7 @@
 # Latest, x86_64, EBS, HVM, Centos7
 data "aws_ami" "centos7" {
   most_recent = true
-<<<<<<< HEAD
   owners = ["410186602215"]
-=======
-
-  owners = ["215771694765"]
->>>>>>> f8d11ce8df16709283e474da10340d0421905503
 
   filter {
     name   = "architecture"
